@@ -25,22 +25,26 @@ def create_user(req):
 @api_view(['PUT'])
 def updation_user(req,pk):
     try:
-        user1=user.objects.get(pk)
+        user1=user.objects.get(pk=pk)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND) 
+    
     serlz=apiserializer(user1,data=req.data)
     if serlz.is_valid():
         serlz.save()
-        return Response(serlz.data,status=status.HTTP_202_ACCEPTED)
+        return Response(serlz.data,status=status.HTTP_201_CREATED)
+    return Response(serlz.errors,status=status.HTTP_400_BAD_REQUEST)
     
 @api_view(['DELETE'])
-def delete_user(pk):
+def delete_user(req,pk):
     try:
-        user=object.all.get(pk)
+        user2=user.objects.get(pk=pk) 
     except:
         return Response(status=status.HTTP_404_NOT_FOUND) 
     
-    user.delete()
+    
+    user3=user2.delete()
+    return Response(user3,status=status.HTTP_201_CREATED)
     return Response(status=status.HTTP_100_CONTINUE)
 
 
