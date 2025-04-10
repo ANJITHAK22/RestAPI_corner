@@ -43,9 +43,8 @@ def delete_user(req,pk):
         return Response(status=status.HTTP_404_NOT_FOUND) 
     
     
-    user3=user2.delete()
-    return Response(user3,status=status.HTTP_201_CREATED)
-    return Response(status=status.HTTP_100_CONTINUE)
+    user2.delete()
+    return Response(status=status.HTTP_200_OK)
 
 
     
